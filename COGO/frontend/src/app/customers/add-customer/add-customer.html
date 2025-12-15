@@ -1,0 +1,45 @@
+<div *ngIf="canAdd(); else noAccess" class="add-container">
+
+    <h2>Add New Customer</h2>
+
+    <form (ngSubmit)="createCustomer()">
+
+        <label>Name</label>
+        <input type="text" [(ngModel)]="name" name="name" required />
+
+        <label>Email</label>
+        <input type="email" [(ngModel)]="email" name="email" required />
+
+        <label>Phone</label>
+        <input type="text" [(ngModel)]="phone" name="phone" />
+
+        <h3>Address</h3>
+
+        <label>Line 1</label>
+        <input type="text" [(ngModel)]="line1" name="line1" />
+
+        <label>Line 2</label>
+        <input type="text" [(ngModel)]="line2" name="line2" />
+
+        <label>City</label>
+        <input type="text" [(ngModel)]="city" name="city" />
+
+        <label>State</label>
+        <input type="text" [(ngModel)]="state" name="state" />
+
+        <label>Zip</label>
+        <input type="text" [(ngModel)]="zip" name="zip" />
+
+        <div *ngIf="errorMessage" class="error">
+            {{ errorMessage }}
+        </div>
+
+        <button type="submit">Add Customer</button>
+        <button type="button" class="back-button" (click)="goBack()">← Back</button>
+
+    </form>
+</div>
+
+<ng-template #noAccess>
+    <p>You do not have permission to add customers.</p>
+</ng-template>

@@ -1,0 +1,42 @@
+<div class="item-list-container">
+
+    <h2>Orders</h2>
+
+    <div class="sort-container">
+        <label for="sort">Sort:</label>
+        <select id="sort" [(ngModel)]="sortOption">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="totalAsc">Total Low–High</option>
+            <option value="totalDesc">Total High–Low</option>
+            <option value="statusAsc">Status A–Z</option>
+        </select>
+    </div>
+
+    <p *ngIf="filteredOrders.length === 0" class="no-results">
+        No orders match your search.
+    </p>
+    <div class="card-container">
+        <div class="item-card" *ngFor="let order of filteredOrders" (click)="viewOrder(order)" [ngClass]="{
+      'low-stock': order.status === 'cancelled',
+      'medium-stock': order.status === 'pending',
+      'high-stock': order.status === 'paid' || order.status === 'shipped'
+    }">
+
+            <h3>
+                Order {{ order._id?.slice(-6) }}
+                <span *ngIf="order.status" style="font-weight: 400;">— {{ order.status | titlecase }}</span>
+            </h3>
+
+            <p *ngIf="order.customerId?.name">Customer: {{ order.customerId.name }}</p>
+            <p *ngIf="!order.customerId?.name">Customer: {{ order.customerId }}</p>
+
+            <p>Total: {{ order.total }}</p>
+            <p *ngIf="order.items?.length">Lines: {{ order.items.length }}</p>
+
+            <span *ngIf="order.status === 'pending'" class="low-warning">
+                PENDING
+            </span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,118 @@
+:host {
+    display: block;
+    position: relative;
+    z-index: 10;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #007bff;
+    padding: 0.8rem 1.5rem;
+    color: white;
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.user-label::before {
+    content: "•";
+    margin: 0 0.5rem;
+    opacity: 0.6;
+}
+
+.user-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #e2e2e2;
+    opacity: 0.9;
+}
+
+
+.nav-right a {
+    color: white;
+    text-decoration: none;
+    margin-right: 1rem;
+    font-weight: 500;
+}
+
+.nav-right a.active {
+    text-decoration: underline;
+}
+
+.nav-button {
+  background: #198754;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.nav-button:hover {
+  background: #146c43;
+}
+
+.nav-right button {
+    padding: 0.4rem 0.8rem;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.nav-right button:hover {
+    background: #b02a37;
+}
+
+.nav-search {
+    margin: 0 1rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 5px;
+    border: none;
+    font-size: 0.9rem;
+    width: 160px;
+}
+
+.nav-search:focus {
+    outline: none;
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.nav-search {
+    padding-right: 2rem; // room for the clear button
+}
+
+.clear-btn {
+    position: absolute;
+    right: 6px;
+    border: none;
+    background: transparent;
+    color: #666;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0;
+
+    &:hover {
+        color: #c00;
+    }
+}
+
+
+

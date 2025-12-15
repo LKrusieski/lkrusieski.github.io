@@ -1,0 +1,66 @@
+<div class="detail-container" *ngIf="order; else loading">
+
+    <h2>Order Detail</h2>
+
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+    <div class="card">
+        <p><strong>Order:</strong> {{ order._id }}</p>
+        <p>
+            <strong>Customer:</strong>
+            <span *ngIf="order.customerId?.name">{{ order.customerId.name }}</span>
+            <span *ngIf="!order.customerId?.name">{{ order.customerId }}</span>
+        </p>
+        <p><strong>Created:</strong> {{ order.createdAt | date:'medium' }}</p>
+        <p><strong>Total:</strong> {{ order.total }}</p>
+
+        <label>Status</label>
+        <select [(ngModel)]="status" name="status" [disabled]="!canEdit()">
+            <option value="pending">Pending</option>
+            <option value="paid">Paid</option>
+            <option value="shipped">Shipped</option>
+            <option value="cancelled">Cancelled</option>
+        </select>
+
+        <div class="actions">
+            <button type="button" (click)="saveStatus()" [disabled]="!canEdit()">Save</button>
+            <button type="button" class="danger" (click)="deleteOrder()" [disabled]="!canDelete()">Delete</button>
+            <button type="button" class="secondary" (click)="goBack()">← Back</button>
+        </div>
+    </div>
+
+    <h3>Line Items</h3>
+
+    <div class="card">
+        <table class="lines" *ngIf="order.items?.length; else noLines">
+            <thead>
+                <tr>
+                    <th>SKU</th>
+                    <th>Name</th>
+                    <th style="text-align:right;">Qty</th>
+                    <th style="text-align:right;">Price</th>
+                    <th style="text-align:right;">Line Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let it of order.items">
+                    <td>{{ it.sku }}</td>
+                    <td>{{ it.name }}</td>
+                    <td style="text-align:right;">{{ it.quantity }}</td>
+                    <td style="text-align:right;">{{ it.price }}</td>
+                    <td style="text-align:right;">{{ lineTotal(it) }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <ng-template #noLines>
+            <p>No line items found.</p>
+        </ng-template>
+    </div>
+
+</div>
+
+<ng-template #loading>
+    <p>Loading order...</p>
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+</ng-template>

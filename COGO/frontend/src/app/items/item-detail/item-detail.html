@@ -1,0 +1,52 @@
+<div class="detail-container" *ngIf="item">
+
+    <!-- VIEW MODE -->
+    <div *ngIf="!editMode" class="detail-card">
+        <h2>{{ item.name }}</h2>
+        <p>{{ item.description }}</p>
+        <p><strong>Quantity:</strong> {{ item.quantity }}</p>
+
+        <button *ngIf="role === 'admin' || role === 'manager' || role === 'associate'" class="edit-button"
+            (click)="toggleEdit()">Edit</button>
+
+        <button class="back-button" (click)="goBack()" [disabled]="editMode">← Back to Items</button>
+
+
+        <button *ngIf="role === 'admin'" class="delete-button" (click)="deleteItem()">Delete</button>
+
+
+        <!-- These will be used once the order screen is in place.
+        
+        <button *ngIf="role === 'admin' || role === 'manager' || role === 'sales'" (click)="editOrder()">
+            Edit Order
+        </button>
+
+        <button *ngIf="role === 'admin' || role === 'manager' || role === 'sales'" (click)="deleteOrder()">
+            Delete Order
+        </button>
+        -->
+
+    </div>
+
+    <!-- EDIT MODE -->
+    <div *ngIf="editMode && (role === 'admin' || role === 'manager' || role === 'associate')">
+
+        <h2>Edit Item</h2>
+
+        <label>Name</label>
+        <input type="text" [(ngModel)]="item.name">
+
+        <label>Description</label>
+        <textarea [(ngModel)]="item.description"></textarea>
+
+        <label>Quantity</label>
+        <input type="number" [(ngModel)]="item.quantity">
+
+        <button *ngIf="role === 'admin' || role === 'manager' || role === 'associate'" class="save-button"
+            (click)="saveChanges()">Save</button>
+
+
+        <button class="cancel-button" (click)="toggleEdit()">Cancel</button>
+    </div>
+
+</div>

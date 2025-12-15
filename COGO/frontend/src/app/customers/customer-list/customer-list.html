@@ -1,0 +1,35 @@
+<div class="item-list-container">
+
+    <h2>Customers</h2>
+
+    <div class="sort-container">
+        <label for="sort">Sort:</label>
+        <select id="sort" [(ngModel)]="sortOption">
+            <option value="nameAsc">Name A–Z</option>
+            <option value="nameDesc">Name Z–A</option>
+            <option value="emailAsc">Email A–Z</option>
+            <option value="emailDesc">Email Z–A</option>
+            <option value="newest">Newest First</option>
+        </select>
+    </div>
+
+    <p *ngIf="filteredCustomers.length === 0" class="no-results">
+        No customers match your search.
+    </p>
+    <div class="card-container">
+        <div class="item-card" *ngFor="let customer of filteredCustomers" (click)="viewCustomer(customer)" [ngClass]="{
+            'low-stock': !customer.email,
+            'medium-stock': customer.email && !customer.phone,
+            'high-stock': customer.email && customer.phone
+        }">
+
+            <h3>{{ customer.name }}</h3>
+            <p>{{ customer.email }}</p>
+            <p *ngIf="customer.phone">Phone: {{ customer.phone }}</p>
+
+            <span *ngIf="!customer.email" class="low-warning">
+                MISSING EMAIL
+            </span>
+        </div>
+    </div>
+</div>

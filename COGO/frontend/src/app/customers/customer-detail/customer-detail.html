@@ -1,0 +1,44 @@
+<div class="detail-container" *ngIf="customer; else loading">
+    <h2>Customer Detail</h2>
+
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+    <div class="form">
+        <label>Name</label>
+        <input [(ngModel)]="name" name="name" [disabled]="!canEdit()" />
+
+        <label>Email</label>
+        <input [(ngModel)]="email" name="email" [disabled]="!canEdit()" />
+
+        <label>Phone</label>
+        <input [(ngModel)]="phone" name="phone" [disabled]="!canEdit()" />
+
+        <h3>Address</h3>
+
+        <label>Line 1</label>
+        <input [(ngModel)]="line1" name="line1" [disabled]="!canEdit()" />
+
+        <label>Line 2</label>
+        <input [(ngModel)]="line2" name="line2" [disabled]="!canEdit()" />
+
+        <label>City</label>
+        <input [(ngModel)]="city" name="city" [disabled]="!canEdit()" />
+
+        <label>State</label>
+        <input [(ngModel)]="state" name="state" [disabled]="!canEdit()" />
+
+        <label>Zip</label>
+        <input [(ngModel)]="zip" name="zip" [disabled]="!canEdit()" />
+
+        <div class="actions">
+            <button type="button" (click)="save()" [disabled]="!canEdit()">Save</button>
+            <button type="button" class="danger" (click)="delete()" [disabled]="!canDelete()">Delete</button>
+            <button type="button" class="secondary" (click)="goBack()">← Back</button>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <p>Loading customer...</p>
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+</ng-template>

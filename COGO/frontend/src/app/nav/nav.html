@@ -1,0 +1,63 @@
+<nav class="navbar">
+
+    <div class="nav-left">
+        <span class="logo">COGO</span>
+        <span class="user-label" *ngIf="auth.isLoggedIn()">
+            {{ username | titlecase }} — {{ role | titlecase }}
+        </span>
+    </div>
+
+    <div class="nav-right" *ngIf="auth.isLoggedIn()">
+
+        <div class="search-wrapper">
+
+            <input type="text" placeholder="Search..." [(ngModel)]="searchValue" (input)="onSearchChange()"
+                (keyup.enter)="onSearchChange()" class="nav-search" />
+
+            <!-- Clear button appears only when searchValue is not empty -->
+            <button *ngIf="searchValue" class="clear-btn" (click)="clearSearch()">x</button>
+
+        </div>
+
+        <button routerLink="/items" routerLinkActive="active">
+            Items
+        </button>
+
+        <button *ngIf="role === 'admin' || role === 'manager'" routerLink="/add-item" routerLinkActive="active"
+            type="button" class="nav-button">
+            Add Item
+        </button>
+
+        
+
+        <button routerLink="/customers" routerLinkActive="active" type="button"
+            class="nav-button">
+            Customers
+        </button>
+        
+        <button *ngIf="role === 'admin' || role === 'manager'" routerLink="/add-customer" routerLinkActive="active"
+            type="button" class="nav-button">
+            Add Customer
+        </button>
+        
+        <button routerLink="/orders" routerLinkActive="active" type="button"
+            class="nav-button">
+            Orders
+        </button>
+        
+        <button routerLink="/add-order" routerLinkActive="active"
+            type="button" class="nav-button">
+            Add Order
+        </button>
+
+        <button *ngIf="role === 'admin'" routerLink="/admin/users" routerLinkActive="active">
+            Users
+        </button>
+        
+
+       
+
+        <button (click)="logout()">Logout</button>
+    </div>
+
+</nav>

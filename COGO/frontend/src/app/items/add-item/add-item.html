@@ -1,0 +1,37 @@
+<div *ngIf="role === 'admin' || role === 'manager'; else noAccess">
+
+  <div class="add-container">
+
+    <h2>Add New Item</h2>
+    <p style="opacity:.7">ROLE: {{ role }}</p>
+
+    <form>
+      <label>SKU</label>
+      <input type="text" [(ngModel)]="sku" name="sku" required />
+
+      <label>Item Name</label>
+      <input type="text" [(ngModel)]="name" name="name" required>
+
+      <label>Description</label>
+      <textarea [(ngModel)]="description" name="description"></textarea>
+
+      <label>Quantity</label>
+      <input type="number" [(ngModel)]="quantity" name="quantity" min="0" required>
+      
+      <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+      </div>
+      
+      <button type="button" (click)="createItem()">Add Item</button>
+      <button type="button" class="back-button" (click)="goBack()">← Back</button>
+
+
+    </form>
+
+  </div>
+
+</div>
+
+<ng-template #noAccess>
+  <p>You do not have permission to add items.</p>
+</ng-template>

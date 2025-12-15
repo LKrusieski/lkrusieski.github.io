@@ -1,0 +1,3 @@
+COGO - comes from the latin word cogo meaning "to collect", "to drive together", or "to bring together"
+
+I felt this was an appropriate name for an inventory application. 

@@ -1,0 +1,35 @@
+.toast {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background: #333;
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    opacity: 0.95;
+    animation: fadein 0.3s ease-out, fadeout 0.5s ease-in 2.5s;
+    z-index: 9999;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 0.95;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 0.95;
+    }
+
+    to {
+        opacity: 0;
+    }
+}

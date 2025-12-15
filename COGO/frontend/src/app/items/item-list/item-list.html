@@ -1,0 +1,44 @@
+<div class="item-list-container">
+
+    <h2>Items</h2>
+
+    <div class="sort-container">
+        <label for="sort">Sort:</label>
+        <select id="sort" [(ngModel)]="sortOption">
+            <option value="nameAsc">Name A–Z</option>
+            <option value="nameDesc">Name Z–A</option>
+            <option value="qtyAsc">Quantity Low–High</option>
+            <option value="qtyDesc">Quantity High–Low</option>
+            <option value="lowFirst">Low Stock First</option>
+        </select>
+    </div>
+
+    <!-- <button class="add-button" routerLink="/add-item">
+        + Add Item
+    </button>
+ -->
+    <p *ngIf="filteredItems.length === 0" class="no-results">
+        No items match your search.
+    </p>
+
+    <div class="card-container">
+        <div class="item-card" 
+        *ngFor="let item of filteredItems" 
+        (click)="viewItem(item)" 
+        [ngClass]="{
+            'low-stock': item.quantity < LOW_STOCK,
+            'medium-stock': item.quantity >= LOW_STOCK && item.quantity <= MEDIUM_STOCK,
+            'high-stock': item.quantity > MEDIUM_STOCK
+    }">
+
+            <h3>{{ item.name }}</h3>
+            <p>Qty: {{ item.quantity }}</p>
+
+            <span *ngIf="item.quantity < 5" class="low-warning">
+                LOW STOCK
+            </span>
+        </div>
+    </div>
+
+    
+</div>

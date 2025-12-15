@@ -1,0 +1,23 @@
+<div class="page-container">
+    <div class="card">
+        <h2>Login</h2>
+        
+        <div *ngIf="errorMessage" class="error">
+            {{ errorMessage }}
+        </div>
+
+        <label>
+            Username
+            <input type="text" [(ngModel)]="username" />
+        </label>
+
+        <label>
+            Password
+            <input type="password" [(ngModel)]="password" />
+        </label>
+
+        <button (click)="onLogin()">Login</button>
+        <button (click)="auth.logout()">Logout</button>
+        
+    </div>
+</div>

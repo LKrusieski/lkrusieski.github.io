@@ -1,0 +1,9 @@
+<h2>Items</h2>
+
+<ul>
+    <li *ngFor="let i of items">
+        <a [routerLink]="['/items', i._id]">
+            {{ i.name }} - Qty: {{ i.quantity }}
+        </a>
+    </li>
+</ul>

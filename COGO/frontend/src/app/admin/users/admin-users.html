@@ -1,0 +1,64 @@
+<div *ngIf="auth.getRole() === 'admin'; else noAccess" class="wrap">
+    <h2>User Management</h2>
+
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+    <section class="card">
+        <h3>Create User</h3>
+
+        <label>Username</label>
+        <input [(ngModel)]="username" name="username" />
+
+        <label>Password</label>
+        <input [(ngModel)]="password" name="password" type="password" />
+
+        <label>Role</label>
+        <select [(ngModel)]="role" name="role">
+            <option value="admin">admin</option>
+            <option value="manager">manager</option>
+            <option value="associate">associate</option>
+        </select>
+
+        <button type="button" (click)="createUser()">Create</button>
+    </section>
+
+    <section class="card">
+        <h3>Users</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Change Role</th>
+                    <th>Reset Password</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let u of users">
+                    <td>{{ u.username }}</td>
+                    <td>{{ u.role }}</td>
+                    <td>
+                        <select [ngModel]="u.role" (ngModelChange)="updateRole(u, $event)">
+                            <option value="admin">admin</option>
+                            <option value="manager">manager</option>
+                            <option value="associate">associate</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input #pw type="password" placeholder="new password" />
+                        <button type="button" (click)="resetPassword(u, pw.value); pw.value=''">Reset</button>
+                    </td>
+                    <td>
+                        <button type="button" (click)="deleteUser(u)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+
+<ng-template #noAccess>
+    <p>You do not have permission to manage users.</p>
+</ng-template>
